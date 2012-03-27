@@ -1,0 +1,25 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="/">Debt Manager</a>
+			{% if not user.is_anonymous %}
+				<ul class="nav">
+					<li {% if section.levels.level0 == "index" %} class="active" {% endif %}><a href="/">Профиль</a></li>
+					<li {% if section.levels.level0 == "wastes" %}class="active"{% endif %}><a href="/wastes/">Расходы</a></li>
+					<li {% if section.levels.level0 == "repayments" %}class="active"{% endif %}><a href="/repayments/">Выплаты</a></li>
+				</ul>
+				<ul class="nav pull-right">
+					<li><a href="/logout/">Выход ({{ user.name }})</a></li>
+				</ul>
+			{% else %}
+				<form class="navbar-form pull-right" action="/login/send/" method="POST">
+					{% csrf_token %}
+					<input type="text" name="login" class="span2" placeholder="Логин..">
+					<input type="password" name="password" class="span2" placeholder="Пароль..">
+					<button type="submit" class="btn">Вход</button>
+				</form>
+			{% endif %}
+		</div>
+	</div>
+</div>
+		

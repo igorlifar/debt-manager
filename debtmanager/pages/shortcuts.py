@@ -1,0 +1,24 @@
+from django.core.context_processors import csrf
+from django.shortcuts import render_to_response
+from django.template import Context, loader
+
+def convert_section(lst):
+	res = {
+		"size": 0,
+		"levels": {}
+	}
+	
+	i = 0
+	for token in lst:
+		res["size"] += 1
+		res["levels"]["level" + str(i)] = token
+		i += 1
+		
+	return res
+	
+def render(section, context, request):
+	
+	context.update({'section': convert_section(section)})
+	context.update(csrf(request))
+	
+	return render_to_response('page.html', context)

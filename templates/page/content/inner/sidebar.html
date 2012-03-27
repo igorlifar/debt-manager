@@ -1,0 +1,38 @@
+{% if section.levels.level0 == "index" %}
+	<li class="nav-header">Профиль</li>
+	<li class="active"><a href="/wastes/list/"><i class="icon-white icon-list"></i>Статистика</a></li>
+	
+{% endif %}
+
+{% if section.levels.level0 == "wastes" %}
+	<li class="nav-header">Расходы</li>
+	<li {% if section.levels.level1 == "list" %}class="active"{% endif %}><a href="/wastes/list/"><i 
+	{% if section.levels.level1 == "list" %}
+		class="icon-white icon-list"
+	{% else %}
+		class="icon-list"
+	{% endif %}></i>Список</a></li>
+	<li {% if section.levels.level1 == "add" %}class="active"{% endif %}><a href="/wastes/add/"><i 
+	{% if section.levels.level1 == "add" %}
+		class="icon-white icon-file"
+	{% else %}
+		class="icon-file"
+	{% endif %}></i>Добавить</a></li>
+{% endif %}
+
+{% if section.levels.level0 == "repayments" %}
+	<li class="nav-header">Выплаты</li>
+	<li {% if section.levels.level1 == "list" %}class="active"{% endif %}><a href="/repayments/list/"><i 
+	{% if section.levels.level1 == "list" %}
+		class="icon-white icon-list"
+	{% else %}
+		class="icon-list"
+	{% endif %}></i>Список</a></li>
+	<li {% if section.levels.level1 == "add" %}class="active"{% endif %}><a href="/repayments/add/"><i 
+	{% if section.levels.level1 == "add" %}
+		class="icon-white icon-file"
+	{% else %}
+		class="icon-file"
+	{% endif %}></i>Добавить</a></li>
+
+{% endif %}

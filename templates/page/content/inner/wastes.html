@@ -1,0 +1,74 @@
+{% if section.levels.level1 == "list" %}
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Дата</th>
+			<th>Комментарий</th>
+			{% for m in members %}
+				<th>{{ m.name }}</th>
+			{% endfor %}
+			<th>Сумма</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for w in wastes %}
+			<tr>
+				<td>{{ w.date }}</td>
+				<td>{{ w.comment }}</td>
+				{% for m in w.columns %}
+					<td>
+						{% if m.is_member %}
+							{{ m.debet }} / {{ m.credit }}
+						{% else %}
+							-
+						{% endif %}
+					</td>
+				{% endfor %}
+				<td>{{ w.amount }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+{% endif %}
+
+{% if section.levels.level1 == "add" %}
+	<form class="form-horizontal" action="/wastes/add/send/" method="POST">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Добавить запись об очередных расходах</legend>
+			
+			<div class="control-group">
+				<label class="control-label">Комментарий</label>
+				<div class="controls">
+					<textarea class="input-xlarge" name="comment"></textarea>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Статья</label>
+				<div class="controls">
+					<select style="width: 280px;" name="cat">
+						{% for cat in cats %}
+							<option value="{{ cat.id }}">{{ cat.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			{% for member in members %}
+				<div class="control-group">
+					<label class="control-label">{{ member.name }}</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" placeholder="Заплатил" name="debet{{ member.id }}">
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<input type="text" class="input-xlarge" placeholder="Должен" name="credit{{ member.id }}">
+					</div>
+				</div>
+			{% endfor %}
+		</fieldset>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Добавить</button>
+		</div>
+	</form>
+{% endif %}

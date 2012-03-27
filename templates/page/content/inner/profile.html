@@ -1,0 +1,19 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Пользователь</th>
+			<th>Ваш долг</th>
+			<th>Его долг</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for d in debts %}
+			<tr>
+				<td>{{ d.member.name }}</td>
+				<td>{% if d.amount > 0 %} {{ d.amount }} {% else %} - {% endif %}</td>
+				<td>{% if d.amount < 0 %} {{ d.absamount }} {% else %} - {% endif %}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+	<p>{% if balance > 0 %}В сумме вам жолжны {{ balance }} рублей.{% else %}В сумме вы должны {{ absbalance }} рублей.{% endif %}</p>
+</table>

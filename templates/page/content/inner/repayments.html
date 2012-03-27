@@ -1,0 +1,63 @@
+{% if section.levels.level1 == "list" %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>
+					Дата
+				</th>
+				<th>Плательщик
+				</th>
+				<th>Получатель
+				</th>
+				<th>Сумма
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for r in repayments %}
+			<tr>
+			<td>
+				{{ r.date }}
+			</td>
+			<td>
+				{{ r.payer.name }}
+			</td>
+			<td>
+				{{ r.recipient.name }}
+			</td>
+			<td>
+				{{ r.amount }} руб.
+			</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{% if section.levels.level1 == "add" %}
+	<form class="form-horizontal" action="/repayments/add/send/" method="POST">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Добавить запись о выплате</legend>
+			<div class="control-group">
+				<label class="control-label" for="input02">Получатель</label>
+				<div class="controls">
+					<select name="recipient" class="span3">
+						{% for m in members %}
+						<option value="{{ m.id }}">{{ m.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">Сумма выплаты</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge span3" id="input01" name="amount">
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Добавить</button>
+		</div>
+	</form>
+{% endif %}
