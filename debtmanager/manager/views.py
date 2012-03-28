@@ -52,7 +52,7 @@ def add_waste(request):
 		comment = request.POST['comment']
 		
 		if comment == "":
-			return redirect("/value-error/")
+			return redirect("/value-error0/")
 			
 		cat = Category.objects.get(id=int(request.POST['cat']))
 		
@@ -68,9 +68,9 @@ def add_waste(request):
 				debet = 0
 				if request.POST["debet" + str(u.id)] != "":
 					debet = float(request.POST["debet" + str(u.id)])
-					
-				if credit < 1e-9 or debet < 0:
-					return redirect("/value-error/")
+				print debet, " ", credit	
+				if credit < -1e-9 or debet < -1e-9:
+					return redirect("/value-error1/")
 				
 				total_credit += credit
 				total_debet += debet
@@ -84,7 +84,7 @@ def add_waste(request):
 		print machos
 		
 		if len(machos) == 0 or total_credit - 1e-9 > total_debet or total_credit + 1e-9 < total_debet:
-			return redirect("/value-error/")
+			return redirect("/value-error2/")
 			
 		
 		waste = Waste.objects.create(comment = comment, category = cat, amount = total_credit, author = request.user.get_profile())
@@ -96,6 +96,6 @@ def add_waste(request):
 			
 		return redirect("/wastes/list/")
 	except:
-		return redirect("/value-error/")
+		return redirect("/value-error3/")
 		
 		
