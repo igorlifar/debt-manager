@@ -1,3 +1,5 @@
+{% load manager_extras %}
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -10,10 +12,10 @@
 		{% for d in debts %}
 			<tr>
 				<td>{{ d.member.name }}</td>
-				<td>{% if d.amount > 0 %} {{ d.amount }} {% else %} - {% endif %}</td>
-				<td>{% if d.amount < 0 %} {{ d.absamount }} {% else %} - {% endif %}</td>
+				<td>{% if d.amount > 0 %} {{ d.amount|precision:2 }} {% else %} - {% endif %}</td>
+				<td>{% if d.amount < 0 %} {{ d.absamount|precision:2 }} {% else %} - {% endif %}</td>
 			</tr>
 		{% endfor %}
 	</tbody>
-	<p>{% if balance > 0 %}В сумме вам жолжны {{ balance }} рублей.{% else %}В сумме вы должны {{ absbalance }} рублей.{% endif %}</p>
+	<p>{% if balance > 0 %}В сумме вам жолжны {{ balance|precision:2 }} рублей.{% else %}В сумме вы должны {{ absbalance|precision:2 }} рублей.{% endif %}</p>
 </table>

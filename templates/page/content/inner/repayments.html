@@ -1,3 +1,5 @@
+{% load manager_extras %}
+
 {% if section.levels.level1 == "list" %}
 	<table class="table table-striped">
 		<thead>
@@ -26,7 +28,7 @@
 				{{ r.recipient.name }}
 			</td>
 			<td>
-				{{ r.amount }} руб.
+				{{ r.amount|precision:2 }} руб.
 			</td>
 			</tr>
 		{% endfor %}

@@ -1,3 +1,6 @@
+{% load manager_extras %}
+
+
 {% if section.levels.level1 == "list" %}
 <table class="table table-striped">
 	<thead>
@@ -18,13 +21,13 @@
 				{% for m in w.columns %}
 					<td>
 						{% if m.is_member %}
-							{{ m.debet }} / {{ m.credit }}
+							{{ m.debet|precision:2}} / {{ m.credit|precision:2 }}
 						{% else %}
 							-
 						{% endif %}
 					</td>
 				{% endfor %}
-				<td>{{ w.amount }}</td>
+				<td>{{ w.amount|precision:2 }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>
