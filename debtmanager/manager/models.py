@@ -67,6 +67,7 @@ class Waste(models.Model):
 	category = models.ForeignKey(Category, related_name='wastes')
 	date = models.DateTimeField(auto_now_add=True)
 	amount = models.FloatField()
+	author = models.ForeignKey(UserProfile, related_name='wastes')
 	
 	def __unicode__(self):
 		return u'[' + self.category.name + u']: ' + self.comment

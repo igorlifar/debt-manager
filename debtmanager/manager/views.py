@@ -45,6 +45,10 @@ def add_repayment(request):
 		
 def add_waste(request):
 	try:
+		if request.user.is_anonymous():
+			raise Http404
+			
+			
 		comment = request.POST['comment']
 		
 		if comment == "":
@@ -83,7 +87,7 @@ def add_waste(request):
 			return redirect("/value-error/")
 			
 		
-		waste = Waste.objects.create(comment = comment, category = cat, amount = total_credit)
+		waste = Waste.objects.create(comment = comment, category = cat, amount = total_credit, author = request.user.get_profile())
 		
 		print waste
 		
