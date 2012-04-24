@@ -2,7 +2,7 @@ from django.http import Http404
 
 def get_section(request):
 	path = (u'/index' + request.path).strip('/').split('/')
-	path = path[1:len(path)]
+	path = path[1:]
 	
 	if len(path) == 0:
 		return ["index"]

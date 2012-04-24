@@ -4,9 +4,9 @@
 			<a class="brand" href="/">Debt Manager</a>
 			{% if not user.is_anonymous %}
 				<ul class="nav">
-					<li {% if section.levels.level0 == "index" %} class="active" {% endif %}><a href="/">Профиль</a></li>
-					<li {% if section.levels.level0 == "wastes" %}class="active"{% endif %}><a href="/wastes/">Расходы</a></li>
-					<li {% if section.levels.level0 == "repayments" %}class="active"{% endif %}><a href="/repayments/">Выплаты</a></li>
+					<li {% if section.0 == "index" %} class="active" {% endif %}><a href="/">Профиль</a></li>
+					<li {% if section.0 == "wastes" %}class="active"{% endif %}><a href="/wastes/">Расходы</a></li>
+					<li {% if section.0 == "repayments" %}class="active"{% endif %}><a href="/repayments/">Выплаты</a></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="/logout/">Выход ({{ user.name }})</a></li>

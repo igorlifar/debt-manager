@@ -17,5 +17,5 @@
 			</tr>
 		{% endfor %}
 	</tbody>
-	<p>{% if balance > 0 %}В сумме вам жолжны {{ balance|precision:2 }} рублей.{% else %}В сумме вы должны {{ absbalance|precision:2 }} рублей.{% endif %}</p>
+	<p>{% if balance > 0 %}В сумме вам должны {{ balance|precision:2 }} рублей.{% else %}В сумме вы должны {{ absbalance|precision:2 }} рублей.{% endif %}</p>
 </table>

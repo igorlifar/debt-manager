@@ -17,8 +17,9 @@ def convert_section(lst):
 	return res
 	
 def render(section, context, request):
-	
-	context.update({'section': convert_section(section)})
-	context.update(csrf(request))
-	
-	return render_to_response('page.html', context)
+    
+	# context.update({'section': convert_section(section)})
+    context.update({'section': section})
+    context.update(csrf(request))
+    
+    return render_to_response('page.html', context)

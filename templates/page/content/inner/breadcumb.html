@@ -2,38 +2,38 @@
 	<li>
 		<a href="/">Debt Manager</a> <span class="divider">/</span>
 	</li>
-	{% if section.levels.level0 == "index" %}
+	{% if section.0 == "index" %}
 	<li>
 		Профиль
 	</li>
 	{% endif %}
 	
-	{% if section.levels.level0 == "wastes" %}
+	{% if section.0 == "wastes" %}
 		<li>
 			<a href="/wastes/">Расходы</a> <span class="divider">/</span>
 		</li>
 		<li>
-			{% if section.levels.level1 == "list" %}
+			{% if section.1 == "list" %}
 				Список
 			{% endif %}
 			
-			{% if section.levels.level1 == "add" %}
+			{% if section.1 == "add" %}
 				Добавить
 			{% endif %}
 			
 		</li>
 	{% endif %}
 	
-	{% if section.levels.level0 == "repayments" %}
+	{% if section.0 == "repayments" %}
 		<li>
 			<a href="/repayments/">Выплаты</a> <span class="divider">/</span>
 		</li>
 		<li>
-			{% if section.levels.level1 == "list" %}
+			{% if section.1 == "list" %}
 				Список
 			{% endif %}
 			
-			{% if section.levels.level1 == "add" %}
+			{% if section.1 == "add" %}
 				Добавить
 			{% endif %}
 		</li>

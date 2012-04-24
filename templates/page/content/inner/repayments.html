@@ -1,6 +1,6 @@
 {% load manager_extras %}
 
-{% if section.levels.level1 == "list" %}
+{% if section.1 == "list" %}
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -36,7 +36,7 @@
 	</table>
 {% endif %}
 
-{% if section.levels.level1 == "add" %}
+{% if section.1 == "add" %}
 	<form class="form-horizontal" action="/repayments/add/send/" method="POST">
 		{% csrf_token %}
 		<fieldset>

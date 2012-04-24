@@ -107,6 +107,7 @@ ROOT_URLCONF = 'debtmanager.urls'
 
 TEMPLATE_DIRS = (
     '/home/gasya/Documents/debt-manager/templates/',
+    '/Users/dm/Programming/src/coding/debt-manager/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

@@ -1,11 +1,11 @@
 <div class="page-header">
-	{% if section.levels.level0 == "index" %}
+	{% if section.0 == "index" %}
 		<h1>Профиль</h1>
 	{% endif %}
-	{% if section.levels.level0 == "wastes" %}
+	{% if section.0 == "wastes" %}
 		<h1>Расходы</h1>
 	{% endif %}
-	{% if section.levels.level0 == "repayments" %}
+	{% if section.0 == "repayments" %}
 		<h1>Выплаты</h1>
 	{% endif %}
 </div>
@@ -19,15 +19,15 @@
 	</div>
 	<div class="span9">
 		{% include "page/content/inner/breadcumb.html" %}
-		{% if section.levels.level0 == "index" %}
+		{% if section.0 == "index" %}
 			{% include "page/content/inner/profile.html" %}
 		{% endif %}
 		
-		{% if section.levels.level0 == "wastes" %}
+		{% if section.0 == "wastes" %}
 			{% include "page/content/inner/wastes.html" %}
 		{% endif %}
 		
-		{% if section.levels.level0 == "repayments" %}
+		{% if section.0 == "repayments" %}
 			{% include "page/content/inner/repayments.html" %}
 		{% endif %}
 	</div>
