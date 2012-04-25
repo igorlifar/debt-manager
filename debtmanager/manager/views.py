@@ -48,8 +48,7 @@ def add_repayment(request):
 
 def add_waste(request):
     
-	#try:
-	if True:
+	try:
 		if request.user.is_anonymous():
 			raise Http404
 			
@@ -132,5 +131,5 @@ def add_waste(request):
 			WastePart.objects.create(user = macho["profile"], debet = macho["debet"], credit = macho["credit"], waste = waste)
 			
 		return redirect("/wastes/list/")
-	#except:
-	#	return redirect("/value-error3/")
+	except:
+		return redirect("/value-error3/")
