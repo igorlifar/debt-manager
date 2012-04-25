@@ -4,6 +4,8 @@ from django.shortcuts import render_to_response, redirect
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from manager.models import *
+from utils import calc_to_float
+
 
 def login_view(request):
 	try:
@@ -29,7 +31,7 @@ def add_repayment(request):
 	try:
 		payer = request.user.get_profile()
 		recipient = User.objects.get(id=int(request.POST['recipient'])).get_profile()
-		amount = float(request.POST['amount'])
+		amount = calc_to_float(request.POST['amount'])
 		
 		if amount < 1e-2:
 			return redirect("/value-error/")
@@ -42,8 +44,10 @@ def add_repayment(request):
 		return redirect("/repayments/list/")
 	except:
 		return redirect("/value-error/")
-		
+
+
 def add_waste(request):
+    
 	try:
 		if request.user.is_anonymous():
 			raise Http404
@@ -61,13 +65,13 @@ def add_waste(request):
 		machos = []
 		total_debet = 0
 		total_credit = 0
-		
+
 		for u in users:
 			if request.POST["credit" + str(u.id)] != "":
-				credit = float(request.POST["credit" + str(u.id)])
+				credit = calc_to_float(request.POST["credit" + str(u.id)])
 				debet = 0
 				if request.POST["debet" + str(u.id)] != "":
-					debet = float(request.POST["debet" + str(u.id)])
+					debet = calc_to_float(request.POST["debet" + str(u.id)])
 				print debet, " ", credit	
 				if credit < -1e-9 or debet < -1e-9:
 					return redirect("/value-error1/")
@@ -97,5 +101,3 @@ def add_waste(request):
 		return redirect("/wastes/list/")
 	except:
 		return redirect("/value-error3/")
-		
-		
