@@ -86,7 +86,6 @@ def add_waste(request):
 				elif request.POST["debet" + str(u.id)]:
 					debet = calc_to_float(request.POST["debet" + str(u.id)])
 				
-				print debet, " ", credit
 				if credit < -1e-9 or debet < -1e-9:
 					return redirect("/value-error1/")
 				
@@ -99,8 +98,8 @@ def add_waste(request):
 					"credit": credit
 				})
 		
-		if asterisk_credit != 0 and asterisk_debet != 0:
-			redirect("/value-error4")
+		if (asterisk_credit != 0) and (asterisk_debet != 0):
+			return redirect("/value-error4/")
 
 		print machos
 		
