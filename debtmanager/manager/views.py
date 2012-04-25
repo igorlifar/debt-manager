@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from manager.models import *
 from utils import calc_to_float
-
+import re
 
 def login_view(request):
 	try:
@@ -48,7 +48,8 @@ def add_repayment(request):
 
 def add_waste(request):
     
-	try:
+	#try:
+	if True:
 		if request.user.is_anonymous():
 			raise Http404
 			
@@ -65,14 +66,28 @@ def add_waste(request):
 		machos = []
 		total_debet = 0
 		total_credit = 0
+		asterisk_debet = 0
+		asterisk_credit = 0
+		asterisk_list = []
 
 		for u in users:
-			if request.POST["credit" + str(u.id)] != "":
-				credit = calc_to_float(request.POST["credit" + str(u.id)])
+			if request.POST["credit" + str(u.id)] or request.POST["debet" + str(u.id)]:
+				
+				credit = 0
+				if re.match(r'^\s*\*\s*$', request.POST["credit" + str(u.id)]):
+					asterisk_credit += 1
+					asterisk_list.append(len(machos))
+				elif request.POST["credit" + str(u.id)]:
+					credit = calc_to_float(request.POST["credit" + str(u.id)])
+				
 				debet = 0
-				if request.POST["debet" + str(u.id)] != "":
+				if re.match(r'^\s*\*\s*$', request.POST["debet" + str(u.id)]):
+					asterisk_debet += 1
+					asterisk_list.append(len(machos))
+				elif request.POST["debet" + str(u.id)]:
 					debet = calc_to_float(request.POST["debet" + str(u.id)])
-				print debet, " ", credit	
+				
+				print debet, " ", credit
 				if credit < -1e-9 or debet < -1e-9:
 					return redirect("/value-error1/")
 				
@@ -85,9 +100,27 @@ def add_waste(request):
 					"credit": credit
 				})
 		
+		if asterisk_credit != 0 and asterisk_debet != 0:
+			redirect("/value-error4")
+
 		print machos
 		
-		if len(machos) == 0 or total_credit - 1e-9 > total_debet or total_credit + 1e-9 < total_debet:
+		asterisk_value = 0
+		asterisk_field = ""
+
+		if asterisk_debet != 0:
+			asterisk_field = "debet"
+			asterisk_value = (total_credit - total_debet) / len(asterisk_list)
+			total_debet += asterisk_value * len(asterisk_list)
+		elif asterisk_credit != 0:
+			asterisk_field = "credit"
+			asterisk_value = (total_debet - total_credit) / len(asterisk_list)
+			total_credit += asterisk_value * len(asterisk_list)
+
+		for i in asterisk_list:
+			machos[i][asterisk_field] = asterisk_value
+
+		if len(machos) == 0 or total_credit - 1e-9 > total_debet or total_credit + 1e-9 < total_debet or asterisk_value < -1e-9:
 			return redirect("/value-error2/")
 			
 		
@@ -99,5 +132,5 @@ def add_waste(request):
 			WastePart.objects.create(user = macho["profile"], debet = macho["debet"], credit = macho["credit"], waste = waste)
 			
 		return redirect("/wastes/list/")
-	except:
-		return redirect("/value-error3/")
+	#except:
+	#	return redirect("/value-error3/")
