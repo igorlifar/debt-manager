@@ -1,16 +1,17 @@
 from local_settings import root_dir, default_db, default_cache
 
 def rel(path):
-    return root_dir + path
+    return root_dir + path 
 
-# Django settings for debtmanager project.
+ # Django settings for debtmanager project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+ROOT = '/home/debtmanager/debt-manager'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+FORCE_SCRIPT_NAME = ""
 
 MANAGERS = ADMINS
 
@@ -120,7 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+#    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'manager',
