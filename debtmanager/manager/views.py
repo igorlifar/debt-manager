@@ -101,8 +101,6 @@ def add_waste(request):
 		if (asterisk_credit != 0) and (asterisk_debet != 0):
 			return redirect("/value-error4/")
 
-		print machos
-		
 		asterisk_value = 0
 		asterisk_field = ""
 
@@ -124,7 +122,6 @@ def add_waste(request):
 		
 		waste = Waste.objects.create(comment = comment, category = cat, amount = total_credit, author = request.user.get_profile())
 		
-		print waste
 		
 		for macho in machos:
 			WastePart.objects.create(user = macho["profile"], debet = macho["debet"], credit = macho["credit"], waste = waste)

@@ -37,7 +37,6 @@ class ICache(object):
 		return None
 
 	def set_versioned(self, key, value, version):
-		print key, value[:1000], version
 		cache.set(key, {
 			'value': value,
 			'version': version

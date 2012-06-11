@@ -30,8 +30,6 @@ class UpperNode(template.Node):
 		tokens = self.tokens + map(lambda x: unicode(x.resolve(context, True)), self.vals)
 		key = '#'.join(tokens)
 
-		print key
-
 		version = icache.get_sum(tokens)
 		output = icache.get_versioned(key, version)
 
