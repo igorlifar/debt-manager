@@ -22,13 +22,16 @@ def get_context(section, request):
 		
 	
 	if section[0] == "repayments":
-		if len(section) >= 2 and section[1] == "list":
+		if len(section) >= 2 and section[1] in ("my", "list"):
 			def rep_gen():
 				rp = Repayment.objects.all().order_by('-date')
 				
 				r = []
 				for p in rp:
-					yield p.get_ctx()
+					if section[1] == "list":
+						yield p.get_ctx()
+					elif request.user in (p.payer.user, p.recipient.user):
+						yield p.get_ctx()
 			
 			res["repayments"] = rep_gen()
 		
@@ -42,7 +45,7 @@ def get_context(section, request):
 			res["members"] = m
 			
 	if section[0] == "wastes":
-		if len(section) >= 2 and section[1] == "list":
+		if len(section) >= 2 and section[1] in ("my", "list"):
 			members = User.objects.all()
 			
 			mp = {}
@@ -76,7 +79,11 @@ def get_context(section, request):
 							"credit": p.credit,
 						}
 
-					yield c
+
+					if section[1] == 'list':
+						yield c
+					elif c["columns"][mp[str(request.user.id)]]["is_member"]:
+						yield c
 			
 			res["wastes"] = waste_gen(wastes)
 			res["members"] = mbrs

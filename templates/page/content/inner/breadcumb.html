@@ -10,10 +10,10 @@
 	
 	{% if section.0 == "wastes" %}
 		<li>
-			<a href="/wastes/">Расходы</a> <span class="divider">/</span>
+			<a href="/wastes/my/">Расходы</a> <span class="divider">/</span>
 		</li>
 		<li>
-			{% if section.1 == "list" %}
+			{% if section.1 == "list" or section.1 == "my" %}
 				Список
 			{% endif %}
 			
@@ -29,7 +29,7 @@
 			<a href="/repayments/">Выплаты</a> <span class="divider">/</span>
 		</li>
 		<li>
-			{% if section.1 == "list" %}
+			{% if section.1 == "list" or section.1 == "my" %}
 				Список
 			{% endif %}
 			

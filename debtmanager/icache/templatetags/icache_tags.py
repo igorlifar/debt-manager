@@ -34,7 +34,6 @@ class UpperNode(template.Node):
 		output = icache.get_versioned(key, version)
 
 		if output is None:
-			print 'UPDATED_CACHE'
 			output = self.nodelist.render(context)
 			icache.set_versioned(key, output, version)
 

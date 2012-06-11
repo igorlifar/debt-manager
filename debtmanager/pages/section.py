@@ -15,6 +15,9 @@ def get_section(request):
 			if len(path) > 1:
 				if path[1] == "list":
 					return ["wastes", "list"]
+
+				if path[1] == "my":
+					return ["wastes", "my"]
 					
 				if path[1] == "add":
 					return ["wastes", "add"]
@@ -26,6 +29,9 @@ def get_section(request):
 			if len(path) > 1:
 				if path[1] == "list":
 					return ["repayments", "list"]
+
+				if path[1] == "my":
+					return ["repayments", "my"]
 					
 				if path[1] == "add":
 					return ["repayments", "add"]

@@ -41,7 +41,7 @@ def add_repayment(request):
 			
 		Repayment.objects.create(payer = payer, recipient = recipient, amount = amount)
 		
-		return redirect("/repayments/list/")
+		return redirect("/repayments/my/")
 	except:
 		return redirect("/value-error/")
 
@@ -126,6 +126,6 @@ def add_waste(request):
 		for macho in machos:
 			WastePart.objects.create(user = macho["profile"], debet = macho["debet"], credit = macho["credit"], waste = waste)
 			
-		return redirect("/wastes/list/")
+		return redirect("/wastes/my/")
 	except:
 		return redirect("/value-error3/")

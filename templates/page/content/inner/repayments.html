@@ -1,6 +1,18 @@
 {% load manager_extras %}
 
-{% if section.1 == "list" %}
+
+{% if section.1 == "list" or section.1 == "my" %}
+
+	<ul class="nav nav-tabs">
+		<li {% if section.1 == "my" %}class="active"{% endif %}>
+			<a href="/repayments/my/">Мои выплаты</a>
+		</li>
+		
+		<li {% if section.1 == "list" %}class="active"{% endif %}>
+			<a href="/repayments/list/">Все записи</a>
+		</li>
+	</ul>
+
 	<table class="table table-striped">
 		<thead>
 			<tr>

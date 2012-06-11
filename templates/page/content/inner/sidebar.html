@@ -6,8 +6,8 @@
 
 {% if section.0 == "wastes" %}
 	<li class="nav-header">Расходы</li>
-	<li {% if section.1 == "list" %}class="active"{% endif %}><a href="/wastes/list/"><i 
-	{% if section.1 == "list" %}
+	<li {% if section.1 == "list" or section.1 == "my" %}class="active"{% endif %}><a href="/wastes/my/"><i 
+	{% if section.1 == "list" or section.1 == "my" %}
 		class="icon-white icon-list"
 	{% else %}
 		class="icon-list"
@@ -22,8 +22,8 @@
 
 {% if section.0 == "repayments" %}
 	<li class="nav-header">Выплаты</li>
-	<li {% if section.1 == "list" %}class="active"{% endif %}><a href="/repayments/list/"><i 
-	{% if section.1 == "list" %}
+	<li {% if section.1 == "list" or section.1 == "my" %}class="active"{% endif %}><a href="/repayments/my/"><i 
+	{% if section.1 == "list" or section.1 == "my" %}
 		class="icon-white icon-list"
 	{% else %}
 		class="icon-list"
