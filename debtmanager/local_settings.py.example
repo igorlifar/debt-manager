@@ -1,0 +1,20 @@
+root_dir = '/Users/gasya/Projects/debt-manager/'
+
+default_db = {
+    'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+    'NAME': 'debtmanager',                      # Or path to database file if using sqlite3.
+    'USER': 'debt',                      # Not used with sqlite3.
+    'PASSWORD': 'password123',                  # Not used with sqlite3.
+    'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+    'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+}
+
+default_cache = {
+    'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+    'LOCATION': '127.0.0.1:11211',
+    'OPTIONS': {
+        'MAX_ENTRIES': 5000,
+        'KEY_PREFIX': 'debtmanager',
+        'TIMEOUT': 60*60*24
+    }
+}

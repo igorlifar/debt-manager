@@ -1,3 +1,7 @@
+{% load icache_tags %}
+{% load sct_extras %}
+
+{% icache section|section_serialize user.id 'wastes' 'repayments' %}
 <div class="page-header">
 	{% if section.0 == "index" %}
 		<h1>Профиль</h1>
@@ -32,3 +36,4 @@
 		{% endif %}
 	</div>
 </div>
+{% endicache %}

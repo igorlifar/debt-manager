@@ -1,1 +1,5 @@
 *.pyc
+*~
+*test-db*
+*test_db*
+*local_settings.py

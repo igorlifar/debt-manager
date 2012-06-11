@@ -7,6 +7,8 @@ def get_context(section, request):
 		"static": "/static_files/"
 	}
 	
+	res["user"] = request.user
+
 	if request.user.is_anonymous():
 		res["user"] = {
 			"is_anonymous": True
@@ -14,7 +16,8 @@ def get_context(section, request):
 	else:
 		res["user"] = {
 			"is_anonymous": False,
-			"name": request.user.first_name + u' ' + request.user.last_name
+			"name": request.user.first_name + u' ' + request.user.last_name,
+			"id": request.user.id
 		}
 		
 	
@@ -51,31 +54,31 @@ def get_context(section, request):
 				
 			wastes = Waste.objects.all().order_by('-date')
 			
-			ws = []
-			
-			for waste in wastes:
-				wp = waste.parts.all()
-				
-				c = {
-					"amount": str(waste.amount),
-					"date": waste.date.strftime("%d.%m.%Y"),
-					"comment": waste.comment,
-					"columns": [{
-						"is_member": False
-					}] * len(mbrs)
-				}
-				
-				for p in wp:
-					c["columns"][mp[str(p.user.user.id)]] = {
-						"is_member": True,
-						"member": p.user.get_ctx(),
-						"debet": p.debet,
-						"credit": p.credit,
+			def waste_gen(wastes):
+				for waste in wastes:
+					wp = waste.parts.all()
+					
+					c = {
+						"amount": str(waste.amount),
+						"date": waste.date.strftime("%d.%m.%Y"),
+						"comment": waste.comment,
+						"columns": [{
+							"is_member": False
+						}] * len(mbrs)
 					}
 					
-				ws.append(c)
+					for p in wp:
+						c["columns"][mp[str(p.user.user.id)]] = {
+							"is_member": True,
+							"member": p.user.get_ctx(),
+							"debet": p.debet,
+							"credit": p.credit,
+						}
+
+					if c["columns"][mp[str(request.user.id)]]["is_member"]:	
+						yield c
 			
-			res["wastes"] = ws
+			res["wastes"] = waste_gen(wastes)
 			res["members"] = mbrs
 			
 		if len(section) >= 2 and section[1] == "add":
