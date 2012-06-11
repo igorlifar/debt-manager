@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Sum
+from django.db.models.signals import post_save
+from icache import icache
 
 # Create your models here.
 
@@ -106,3 +108,15 @@ class Template(models.Model):
 	
 	def __unicode__(self):
 		return self.category.name
+
+def waste_cache_post_save(sender, **kwargs):
+    icache.incr('wastes')
+
+post_save.connect(waste_cache_post_save, sender=Waste, dispatch_uid="wastes_cache_post_save")
+
+def repayment_cache_post_save(sender, **kwargs):
+    icache.incr('repayments')
+
+post_save.connect(repayment_cache_post_save, sender=Repayment, dispatch_uid="repayments_cache_post_save")
+
+

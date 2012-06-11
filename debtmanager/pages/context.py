@@ -23,13 +23,14 @@ def get_context(section, request):
 	
 	if section[0] == "repayments":
 		if len(section) >= 2 and section[1] == "list":
-			rp = Repayment.objects.all().order_by('-date')
+			def rep_gen():
+				rp = Repayment.objects.all().order_by('-date')
+				
+				r = []
+				for p in rp:
+					yield p.get_ctx()
 			
-			r = []
-			for p in rp:
-				r.append(p.get_ctx())
-			
-			res["repayments"] = r
+			res["repayments"] = rep_gen()
 		
 		if len(section) >= 2 and section[1] == "add":
 			members = User.objects.all().exclude(id=request.user.id)
