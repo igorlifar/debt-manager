@@ -5,7 +5,7 @@ class ICache(object):
 
 	def incr(self, key):
 		if not cache.has_key(key):
-			cache.set(key, 0, self.timeout)
+			cache.set(key, 1, self.timeout)
 		else:
 			cache.incr(key)
 
