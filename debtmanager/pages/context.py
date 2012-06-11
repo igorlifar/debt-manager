@@ -76,8 +76,7 @@ def get_context(section, request):
 							"credit": p.credit,
 						}
 
-					if c["columns"][mp[str(request.user.id)]]["is_member"]:	
-						yield c
+					yield c
 			
 			res["wastes"] = waste_gen(wastes)
 			res["members"] = mbrs
