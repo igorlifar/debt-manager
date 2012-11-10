@@ -15,6 +15,9 @@
 	{% if section.0 == "repayments" %}
 		<h1>Выплаты</h1>
 	{% endif %}
+	{% if section.0 == "summary" %}
+		<h1>Статистика</h1>
+	{% endif %}
 </div>
 <div class="row">
 	<div class="span3">
@@ -37,6 +40,11 @@
 		{% if section.0 == "repayments" %}
 			{% include "page/content/inner/repayments.html" %}
 		{% endif %}
+
+		{% if section.0 == "summary" %}
+			{% include "page/content/inner/summary.html" %}
+		{% endif %}
+
 	</div>
 </div>
 

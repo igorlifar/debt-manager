@@ -12,6 +12,8 @@ urlpatterns = patterns('pages',
 	url(r'^repayments/list/$', 'views.index'),
 	url(r'^repayments/add/$', 'views.index'),
 	url(r'^repayments/my/$', 'views.index'),
+
+	url(r'^summary/$', 'views.index'),
 	
 	url(r'login/$', 'views.login'),
 )

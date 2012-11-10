@@ -17,7 +17,8 @@ def get_context(section, request):
 		res["user"] = {
 			"is_anonymous": False,
 			"name": request.user.first_name + u' ' + request.user.last_name,
-			"id": request.user.id
+			"id": request.user.id,
+			'is_superuser': request.user.is_superuser,
 		}
 		
 	
@@ -142,7 +143,44 @@ def get_context(section, request):
 				res["debts"] = i["debts"]
 				
 		
-				
+	if section[0] == 'summary':
+		users = UserProfile.objects.all()
+		
+		u = []
+		for user in users:
+			u.append({
+				"member": user.get_ctx(),
+				"balance": user.balance(),
+				"debts": []
+			})
+			
+		for i in u:
+			for j in u:
+				if i != j:
+					if i["balance"] < 0 and j["balance"] > 0:
+						t = min(-i["balance"], j["balance"])
+						i["balance"] += t
+						j["balance"] -= t
+						i["debts"].append({
+							"amount": t,
+							"absamount": t,
+							"member": j["member"]
+						})
+						j["debts"].append({
+							"amount": -t,
+							"absamount": t,
+							"member": i["member"]
+						})
+		res['summary'] = {}
+		for cur_user in users:
+			res['summary'][cur_user] = {}
+			res['summary'][cur_user]["member"] = cur_user.get_ctx()
+			res['summary'][cur_user]["balance"] = cur_user.balance()
+			res['summary'][cur_user]["absbalance"] = abs(res['summary'][cur_user]["balance"])
+			
+			for i in u:
+				if i["member"]["id"] == str(cur_user.user_id):
+					res['summary'][cur_user]["debts"] = i["debts"]
 	
 	return res
     

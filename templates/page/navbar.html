@@ -7,6 +7,7 @@
 					<li {% if section.0 == "index" %} class="active" {% endif %}><a href="/">Профиль</a></li>
 					<li {% if section.0 == "wastes" %}class="active"{% endif %}><a href="/wastes/my/">Расходы</a></li>
 					<li {% if section.0 == "repayments" %}class="active"{% endif %}><a href="/repayments/my/">Выплаты</a></li>
+					{% if user.is_superuser %}<li {% if section.0 == "summary" %}class="active"{% endif %}><a href="/summary/">Статистика</a></li>{% endif %}
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="/logout/">Выход ({{ user.name }})</a></li>

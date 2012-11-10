@@ -34,5 +34,10 @@
 	{% else %}
 		class="icon-file"
 	{% endif %}></i>Добавить</a></li>
+{% endif %}
 
+{% if section.0 == "summary" %}
+	<li class="nav-header">Статистика</li>
+	<li class="active"><a href="/summary/"><i
+		class="icon-white icon-list"></i>Список</a></li>
 {% endif %}

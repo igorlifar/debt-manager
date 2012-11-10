@@ -38,4 +38,7 @@ def get_section(request):
 			else:
 				return ["repayments", "list"]
 		
+		if path[0] == 'summary':
+			if request.user.is_superuser:
+				return ['summary']
 	raise Http404
