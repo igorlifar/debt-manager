@@ -1,0 +1,23 @@
+{% load manager_extras %}
+{% for cur_user, value in summary.iteritems %}
+    <h3>{{ cur_user.get_ctx.name }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Пользователь</th>
+                <th>Ваш долг</th>
+                <th>Его долг</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in value.debts %}
+                <tr>
+                    <td>{{ d.member.name }}</td>
+                    <td>{% if d.amount > 0 %} {{ d.amount|precision:2 }} {% else %} - {% endif %}</td>
+                    <td>{% if d.amount < 0 %} {{ d.absamount|precision:2 }} {% else %} - {% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <p>{% if value.balance > 0 %}В сумме вам должны {{ value.balance|precision:2 }} рублей.{% else %}В сумме вы должны {{ value.absbalance|precision:2 }} рублей.{% endif %}</p>
+    </table>
+{% endfor %}
