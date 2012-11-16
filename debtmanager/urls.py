@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^login/send/$', 'manager.views.login_view'),
     url(r'^repayments/add/send/$', 'manager.views.add_repayment'),
     url(r'^wastes/add/send/$', 'manager.views.add_waste'),
+    url(r'^change_pass/$', 'manager.views.change_pass'),
     
     url(r'', include('pages.urls')),
 )

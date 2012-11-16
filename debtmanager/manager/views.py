@@ -129,3 +129,16 @@ def add_waste(request):
 		return redirect("/wastes/my/")
 	except:
 		return redirect("/value-error3/")
+
+
+def change_pass(request):
+	from manager.forms import ChangePasswordForm
+	from django.shortcuts import redirect
+	if request.method == 'POST':
+		form = ChangePasswordForm(request.POST)
+		if form.is_valid():
+			user = request.user
+			user.set_password(form.cleaned_data['pass1'])
+			user.save()
+			return redirect('/profile/?success')
+	return redirect('/profile-error/')

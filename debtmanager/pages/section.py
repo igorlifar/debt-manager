@@ -41,4 +41,8 @@ def get_section(request):
 		if path[0] == 'summary':
 			if request.user.is_superuser:
 				return ['summary']
+
+		if path[0] == 'profile':
+			return ['profile']
+			
 	raise Http404

@@ -182,5 +182,11 @@ def get_context(section, request):
 				if i["member"]["id"] == str(cur_user.user_id):
 					res['summary'][cur_user]["debts"] = i["debts"]
 	
+	if section[0] == 'profile':
+		from manager.forms import ChangePasswordForm
+		from django.shortcuts import redirect
+		form = ChangePasswordForm()
+		res['form'] = form
+		res['success'] = 'success' in request.GET
 	return res
     

@@ -14,6 +14,7 @@ urlpatterns = patterns('pages',
 	url(r'^repayments/my/$', 'views.index'),
 
 	url(r'^summary/$', 'views.index'),
+	url(r'^profile/$', 'views.index'),
 	
 	url(r'login/$', 'views.login'),
 )

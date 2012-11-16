@@ -1,10 +1,6 @@
 {% load icache_tags %}
 {% load sct_extras %}
 {% icache section|section_serialize user.id 'wastes' 'repayments' %}
-<div class="alert alert-block">
-        <h4 class="alert-heading">Внимание!</h4>
-        <p>Я тут ночью много эксперементировал с разными ништяками, в результате чего все *должно* работать на порядок шустрее. Если кто-то заметит что-то подозрительное или какие-то баги - сообщите. Have fun!</p>
-      </div>
 <div class="page-header">
 	{% if section.0 == "index" %}
 		<h1>Профиль</h1>
@@ -17,6 +13,9 @@
 	{% endif %}
 	{% if section.0 == "summary" %}
 		<h1>Статистика</h1>
+	{% endif %}
+	{% if section.0 == "profile" %}
+		<h1>Профиль</h1>
 	{% endif %}
 </div>
 <div class="row">
@@ -43,6 +42,10 @@
 
 		{% if section.0 == "summary" %}
 			{% include "page/content/inner/summary.html" %}
+		{% endif %}
+
+		{% if section.0 == "profile" %}
+			{% include "page/content/inner/change-password.html" %}
 		{% endif %}
 
 	</div>
