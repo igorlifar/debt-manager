@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '%s/static/' % root_dir}),
+    url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '%s/static_files/' % root_dir}),
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^logout/$', 'manager.views.logout_view'),
